@@ -9,7 +9,7 @@ function displayMovie(movieObject) {
   const actorsString = movieObject.actors.join(", "); // Ny linje!
 
   const movieHTML = `
-    <article class="movie-card" tabindex="0" data-description="${movieObject.description}>
+    <article class="movie-card" tabindex="0" data-description="${movieObject.description}>   //<-- DET HER FJERNER MINE BILLEDER
       <img src="${movieObject.image}" 
            alt="Poster of ${movieObject.title}" 
            class="movie-poster" />
