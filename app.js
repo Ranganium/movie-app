@@ -82,14 +82,14 @@ function displayMovie(movie) {
   const newCard = movieList.lastElementChild;
   newCard.addEventListener("click", function () {
     console.log(`🎬 Klik på: "${movie.title}"`);
-    showMovieDetails(movie);
+    showMovieModal(movie); // ÆNDRET: Fra showMovieDetails til showMovieModal
   });
 
   // Tilføj keyboard support
   newCard.addEventListener("keydown", function (event) {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      showMovieDetails(movie);
+      showMovieModal(movie); // ÆNDRET: Fra showMovieDetails til showMovieModal
     }
   });
 }
@@ -233,3 +233,27 @@ function filterMovies() {
 
 // Start appen når siden er loaded
 initApp();
+
+// #8: Vis movie i modal dialog
+function showMovieModal(movie) {
+  console.log("🎭 Åbner modal for:", movie.title);
+
+  // Byg HTML struktur dynamisk
+  const dialogContent = document.querySelector("#dialog-content");
+  dialogContent.innerHTML = `
+    <img src="${movie.image}" alt="Poster af ${
+    movie.title
+  }" class="movie-poster">
+    <div class="dialog-details">
+      <h2>${movie.title} <span class="movie-year">(${movie.year})</span></h2>
+      <p class="movie-genre">${movie.genre.join(", ")}</p>
+      <p class="movie-rating">⭐ ${movie.rating}</p>
+      <p><strong>Director:</strong> ${movie.director}</p>
+      <p><strong>Actors:</strong> ${movie.actors.join(", ")}</p>
+      <p class="movie-description">${movie.description}</p>
+    </div>
+  `;
+
+  // Åbn modalen
+  document.querySelector("#movie-dialog").showModal();
+}
